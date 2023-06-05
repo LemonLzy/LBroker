@@ -14,5 +14,13 @@ class Logger(object):
         msg = ';'.join('%s' % arg for arg in args)
         self.logger.debug(msg)
 
+    def warning(self, *args):
+        msg = ';'.join('%s' % arg for arg in args)
+        self.logger.warning(msg)
 
-my_logger = Logger()
+    def error(self, *args):
+        msg = ';'.join('%s' % arg for arg in args)
+        self.logger.error(msg)
+
+
+l_log = Logger()
