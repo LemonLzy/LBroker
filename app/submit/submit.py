@@ -1,3 +1,5 @@
+import requests
+
 from app.params.params import IndividualReq
 from app.utils.const.const import Broker
 
@@ -5,7 +7,7 @@ from app.utils.const.const import Broker
 class BaseSubmit:
     def __init__(self, broker: Broker, req: IndividualReq):
         self.uid = req.uid
-        self.session = req.sig.session
+        self.session = requests.session()
         self.broker = broker
         self.account_type = req.open_account
 

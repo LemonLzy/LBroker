@@ -14,6 +14,13 @@ class BaseRsp:
     msg: str
     data: dataclass
 
+    def __repr__(self):
+        return {
+            "code": self.code,
+            "msg": self.msg,
+            "data": self.data
+        }
+
 
 @dataclass
 class Sig:
