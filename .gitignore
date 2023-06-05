@@ -1,0 +1,52 @@
+node_modules
+bower_components
+npm-debug.log
+
+# phpstorm project files
+.idea
+
+*.iml
+.dist
+scripts-build
+css-build
+.tmp
+coverage
+.out.txt
+
+# Mac DS_Store Files
+.DS_Store
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+#/vendor
+/vendor/**/.git
+
+# composer itself is not needed
+composer.phar
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+.vscode
+.history
+docs
+# package-lock.json
+wiki
+
+test/.jestcache
+test/coverage
+
+es5/
+
+myapp.log
