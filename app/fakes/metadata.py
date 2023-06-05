@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import requests
 
 from app.fakes.fakes import fake
-from app.utils.const import Broker
+from app.utils.const.const import Broker
 
 
 @dataclass
