@@ -1,3 +1,5 @@
+from flask_cors import CORS
+
 from app.approve.by_audit import BYAudit
 from app.params.params import BaseRsp, IndividualReq
 from app.submit.by_submit import BYSubmit
@@ -5,6 +7,7 @@ from app.utils.const.const import Broker
 from flask import Blueprint, jsonify, Response
 
 apis = Blueprint('apis', __name__)
+CORS(apis, resources={r"/*": {"origins": "*"}})
 
 
 @apis.route("/individual", methods=["POST"])
