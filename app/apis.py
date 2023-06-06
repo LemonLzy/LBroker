@@ -15,14 +15,14 @@ def individual():
         broker=Broker.BY,
         sig=None,
     )
-    return BYSubmit(req).basic_info()
+    rsp = BaseRsp(code=0, msg="Success", data=BYSubmit(req).submit())
+    return jsonify(rsp)
 
 
 @apis.route("/mock_rsp/<path:req>", methods=["POST"])
 def mock_rsp(req: str) -> Response:
     rsp = BaseRsp(code=0, msg="Success", data=req)
-    rsp_dict = rsp.__dict__
-    return jsonify(rsp_dict)
+    return jsonify(rsp)
 
 
 @apis.route("/hello")
