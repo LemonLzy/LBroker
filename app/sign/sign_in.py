@@ -43,7 +43,7 @@ class BaseSignIn:
         这里实现具体的用户登录逻辑，此处用faker数据返回登录成功后的session
         """
         l_log.debug(f"登录链接：{self.url}, 登录成功, session：{self.s}")
-        return SignInRsp()
+        return SignInRsp().sig
 
     @retry(wait_random_min=2000, wait_random_max=4000, stop_max_attempt_number=10)
     def company_sign_in(self):
@@ -51,7 +51,7 @@ class BaseSignIn:
         这里实现具体的公司登录逻辑，此处用faker数据返回登录成功后的session
         """
         l_log.debug(f"登录链接：{self.url}, 登录成功, session：{self.s}")
-        return SignInRsp()
+        return SignInRsp().sig
 
     @retry(wait_random_min=2000, wait_random_max=4000, stop_max_attempt_number=10)
     def staff_sign_in(self):
@@ -59,7 +59,7 @@ class BaseSignIn:
         这里实现具体的客服登录逻辑，此处用faker数据返回登录成功后的session
         """
         l_log.debug(f"登录链接：{self.url}, 登录成功, session：{self.s}")
-        return SignInRsp()
+        return SignInRsp().sig
 
 
 if __name__ == '__main__':

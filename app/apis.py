@@ -1,5 +1,6 @@
+from app.approve.by_audit import BYAudit
 from app.params.params import BaseRsp, IndividualReq
-from app.submit.by import BYSubmit
+from app.submit.by_submit import BYSubmit
 from app.utils.const.const import Broker
 from flask import Blueprint, jsonify, Response
 
@@ -15,7 +16,10 @@ def individual():
         broker=Broker.BY,
         sig=None,
     )
+    # 提交开户申请
     rsp = BaseRsp(code=0, msg="Success", data=BYSubmit(req).submit())
+    # 审批开户申请
+    rsp = BaseRsp(code=0, msg="Success", data=BYAudit(req).audit_flow())
     return jsonify(rsp)
 
 
