@@ -34,13 +34,13 @@ class HKSubmit(BaseSubmit):
 
     def address_info(self):
         address_req = {
-            'address_country': fake.country(),
-            'state': fake.city(),
-            'street': fake.street_name(),
-            'street_number': fake.building_number(),
-            'suburb': fake.street_suffix(),
-            'zipcode': fake.postcode(),
-            'address_type': fake.random_int(0, 1)
+            "address_country": fake.country(),
+            "state": fake.city(),
+            "street": fake.street_name(),
+            "street_number": fake.building_number(),
+            "suburb": fake.street_suffix(),
+            "zipcode": fake.postcode(),
+            "address_type": fake.random_int(0, 1)
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -53,13 +53,13 @@ class HKSubmit(BaseSubmit):
 
     def work_info(self):
         work_req = {
-            'company_address': fake.street_address(),
-            'company_country': fake.country(),
-            'company_name': fake.company(),
-            'company_phone': fake.phone_number(),
-            'company_type': fake.random_int(0, 1),
-            'job_title': fake.job(),
-            'office_phone': fake.phone_number()
+            "company_address": fake.street_address(),
+            "company_country": fake.country(),
+            "company_name": fake.company(),
+            "company_phone": fake.phone_number(),
+            "company_type": fake.random_int(0, 1),
+            "job_title": fake.job(),
+            "office_phone": fake.phone_number()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -72,8 +72,8 @@ class HKSubmit(BaseSubmit):
 
     def tax_info(self):
         tax_req = {
-            'tax_code': fake.random_int(1000000, 9999999),
-            'tax_country': fake.country(),
+            "tax_code": fake.random_int(1000000, 9999999),
+            "tax_country": fake.country(),
             "tax_information": fake.paragraph(),
             "w8_nation_info": fake.country()
         }
@@ -88,8 +88,8 @@ class HKSubmit(BaseSubmit):
 
     def disclosure_info(self):
         disclosure_req = {
-            'setup_type': 1,
-            'finish_info': fake.random_int(1, 99)
+            "setup_type": 1,
+            "finish_info": fake.random_int(1, 99)
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -102,8 +102,8 @@ class HKSubmit(BaseSubmit):
 
     def cert_info(self):
         cert_req = {
-            'address_proof': fake.image_url(),
-            'id_card': fake.image_url()
+            "address_proof": fake.image_url(),
+            "id_card": fake.image_url()
         }
 
         # 请求本地的mock接口，伪造返回成功

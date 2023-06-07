@@ -30,12 +30,12 @@ class CRSubmit(BaseSubmit):
 
     def address_info(self):
         address_req = {
-            'address_apt_suite_bldg': fake.street_address(),
-            'address_country': fake.country(),
-            'street': fake.street_name(),
-            'street_number': fake.building_number(),
-            'suburb': fake.street_suffix(),
-            'zipcode': fake.postcode()
+            "address_apt_suite_bldg": fake.street_address(),
+            "address_country": fake.country(),
+            "street": fake.street_name(),
+            "street_number": fake.building_number(),
+            "suburb": fake.street_suffix(),
+            "zipcode": fake.postcode()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -48,8 +48,8 @@ class CRSubmit(BaseSubmit):
 
     def tax_info(self):
         tax_req = {
-            'tax_code': fake.random_int(1000000, 9999999),
-            'tax_country': fake.country(),
+            "tax_code": fake.random_int(1000000, 9999999),
+            "tax_country": fake.country(),
             "tax_reason": fake.paragraph()
         }
 
@@ -63,11 +63,11 @@ class CRSubmit(BaseSubmit):
 
     def question_info(self):
         question_req = {
-            'annual_income': fake.random_int(10, 99),
-            'invest_experience': fake.random_digit(),
-            'invest_target': fake.paragraph(),
-            'invest_horizon': fake.random_int(1, 99),
-            'invest_target_other': fake.paragraph()
+            "annual_income": fake.random_int(10, 99),
+            "invest_experience": fake.random_digit(),
+            "invest_target": fake.paragraph(),
+            "invest_horizon": fake.random_int(1, 99),
+            "invest_target_other": fake.paragraph()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -80,8 +80,8 @@ class CRSubmit(BaseSubmit):
 
     def disclosure_info(self):
         disclosure_req = {
-            'agreement_no': fake.random_int(100000000, 999999999),
-            'type': fake.random_int(1, 99)
+            "agreement_no": fake.random_int(100000000, 999999999),
+            "type": fake.random_int(1, 99)
         }
 
         # 请求本地的mock接口，伪造返回成功

@@ -32,14 +32,14 @@ class USSubmit(BaseSubmit):
 
     def address_info(self):
         address_req = {
-            'address_apt_suite_bldg': fake.street_address(),
-            'address_country': fake.country(),
-            'state': fake.city(),
-            'street': fake.street_name(),
-            'street_number': fake.building_number(),
+            "address_apt_suite_bldg": fake.street_address(),
+            "address_country": fake.country(),
+            "state": fake.city(),
+            "street": fake.street_name(),
+            "street_number": fake.building_number(),
             "us_resident": 1,
-            'suburb': fake.street_suffix(),
-            'zipcode': fake.postcode()
+            "suburb": fake.street_suffix(),
+            "zipcode": fake.postcode()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -52,8 +52,8 @@ class USSubmit(BaseSubmit):
 
     def tax_info(self):
         tax_req = {
-            'tax_code': fake.random_int(1000000, 9999999),
-            'tax_country': fake.country(),
+            "tax_code": fake.random_int(1000000, 9999999),
+            "tax_country": fake.country(),
             "asset": fake.random_int(1, 99),
             "company": fake.company(),
             "contact_address": fake.street_address(),
@@ -70,8 +70,8 @@ class USSubmit(BaseSubmit):
 
     def question_info(self):
         question_req = {
-            'annual_income': fake.random_int(10, 99),
-            'invest_experience': fake.random_digit(),
+            "annual_income": fake.random_int(10, 99),
+            "invest_experience": fake.random_digit(),
             "category": fake.random_int(1, 9),
             "revenue": fake.random_int(1, 9),
             "source": fake.random_int(1, 9),
@@ -88,9 +88,9 @@ class USSubmit(BaseSubmit):
 
     def disclosure_info(self):
         disclosure_req = {
-            'approve_agreement': 1,
-            'us_stock_disclosure': fake.random_int(1, 99),
-            'signature': fake.name()
+            "approve_agreement": 1,
+            "us_stock_disclosure": fake.random_int(1, 99),
+            "signature": fake.name()
         }
 
         # 请求本地的mock接口，伪造返回成功
