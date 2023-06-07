@@ -1,6 +1,6 @@
 from flask_cors import CORS
 
-from app.approve.by_audit import BYAudit
+from app.audit.by_audit import BYAudit
 from app.params.params import BaseRsp, IndividualReq
 from app.submit.by_submit import BYSubmit
 from app.utils.const.const import Broker

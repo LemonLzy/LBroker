@@ -1,6 +1,6 @@
 from flask import current_app, url_for
 
-from app.approve.audit import Audit
+from app.audit.audit import Audit
 from app.fakes.fakes import fake
 from app.params.params import IndividualReq
 from app.utils.const.const import Broker
