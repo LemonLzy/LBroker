@@ -36,12 +36,12 @@ class JPSubmit(BaseSubmit):
 
     def address_info(self):
         address_req = {
-            'address_country': fake.country(),
-            'city': fake.city(),
-            'street': fake.street_name(),
-            'line1': fake.building_number(),
-            'line2': fake.street_suffix(),
-            'zipcode': fake.postcode()
+            "address_country": fake.country(),
+            "city": fake.city(),
+            "street": fake.street_name(),
+            "line1": fake.building_number(),
+            "line2": fake.street_suffix(),
+            "zipcode": fake.postcode()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -54,10 +54,10 @@ class JPSubmit(BaseSubmit):
 
     def question_info(self):
         question_req = {
-            'annual_income': fake.random_int(10, 99),
-            'invest_experience': fake.random_digit(),
-            'position': fake.job(),
-            'business': fake.company(),
+            "annual_income": fake.random_int(10, 99),
+            "invest_experience": fake.random_digit(),
+            "position": fake.job(),
+            "business": fake.company(),
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -70,8 +70,8 @@ class JPSubmit(BaseSubmit):
 
     def disclosure_info(self):
         disclosure_req = {
-            'risk_no': fake.port_number(),
-            'lang': fake.language_code()
+            "risk_no": fake.port_number(),
+            "lang": fake.language_code()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -84,8 +84,8 @@ class JPSubmit(BaseSubmit):
 
     def my_number_info(self):
         my_number_req = {
-            'file_name': fake.file_name(),
-            'space_id': fake.iana_id()
+            "file_name": fake.file_name(),
+            "space_id": fake.iana_id()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -98,11 +98,11 @@ class JPSubmit(BaseSubmit):
 
     def cert_info(self):
         cert_req = {
-            'doc_type': fake.random_int(1, 99),
-            'front': fake.image_url(),
-            'back': fake.image_url(),
-            'tilted': fake.image_url(),
-            'validate': fake.date()
+            "doc_type": fake.random_int(1, 99),
+            "front": fake.image_url(),
+            "back": fake.image_url(),
+            "tilted": fake.image_url(),
+            "validate": fake.date()
         }
 
         # 请求本地的mock接口，伪造返回成功

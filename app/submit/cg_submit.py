@@ -32,11 +32,11 @@ class CGSubmit(BaseSubmit):
 
     def address_info(self):
         address_req = {
-            'address_country': fake.country(),
-            'state': fake.city(),
-            'street': fake.street_name(),
-            'street_number': fake.building_number(),
-            'zipcode': fake.postcode()
+            "address_country": fake.country(),
+            "state": fake.city(),
+            "street": fake.street_name(),
+            "street_number": fake.building_number(),
+            "zipcode": fake.postcode()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -49,10 +49,10 @@ class CGSubmit(BaseSubmit):
 
     def tax_info(self):
         tax_req = {
-            'tax_code': fake.random_int(1000000, 9999999),
-            'tax_country': fake.country(),
-            'crs_code': fake.country_code(),
-            'crs_country': fake.country()
+            "tax_code": fake.random_int(1000000, 9999999),
+            "tax_country": fake.country(),
+            "crs_code": fake.country_code(),
+            "crs_country": fake.country()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -65,10 +65,10 @@ class CGSubmit(BaseSubmit):
 
     def question_info(self):
         question_req = {
-            'annual_income': fake.random_int(10, 99),
-            'invest_experience': fake.random_digit(),
-            'employee': fake.company(),
-            'email': fake.company_email()
+            "annual_income": fake.random_int(10, 99),
+            "invest_experience": fake.random_digit(),
+            "employee": fake.company(),
+            "email": fake.company_email()
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -81,11 +81,11 @@ class CGSubmit(BaseSubmit):
 
     def disclosure_info(self):
         disclosure_req = {
-            'approve_agreement': 1,
-            'cg_stock_disclosure': fake.random_int(1, 99),
-            'us_stock_disclosure': fake.random_int(1, 99),
-            'hk_stock_disclosure': fake.random_int(1, 99),
-            'signature': fake.name()
+            "approve_agreement": 1,
+            "cg_stock_disclosure": fake.random_int(1, 99),
+            "us_stock_disclosure": fake.random_int(1, 99),
+            "hk_stock_disclosure": fake.random_int(1, 99),
+            "signature": fake.name()
         }
 
         # 请求本地的mock接口，伪造返回成功
