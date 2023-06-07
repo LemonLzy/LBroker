@@ -1,10 +1,8 @@
 from flask_cors import CORS
 
-from app.audit.by_audit import BYAudit
-from app.params.params import BaseRsp, IndividualReq
-from app.submit.by_submit import BYSubmit
-from app.utils.const.const import Broker
-from flask import Blueprint, jsonify, Response
+from app.params.params import BaseRsp
+from app.transport.transport import Trans
+from flask import Blueprint, jsonify, Response, request
 
 apis = Blueprint('apis', __name__)
 CORS(apis, resources={r"/*": {"origins": "*"}})
@@ -12,17 +10,10 @@ CORS(apis, resources={r"/*": {"origins": "*"}})
 
 @apis.route("/individual", methods=["POST"])
 def individual():
-    req = IndividualReq(
-        method="individual",
-        attribution=Broker.BY,
-        account_status=1,
-        broker=Broker.BY,
-        sig=None,
-    )
-    # 提交开户申请
-    rsp = BaseRsp(code=0, msg="Success", data=BYSubmit(req).submit())
-    # 审批开户申请
-    rsp = BaseRsp(code=0, msg="Success", data=BYAudit(req).audit_flow())
+    # 获取请求参数
+    req = request.json
+    # 给转发函数处理后续流程
+    rsp = Trans().transport(req)
     return jsonify(rsp)
 
 
