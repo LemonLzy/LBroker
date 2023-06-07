@@ -4,11 +4,11 @@ from app.utils.const.const import Broker
 
 class SubmitEntry:
     @staticmethod
-    def submit(broker: Broker, req: IndividualReq):
+    def submit(req: IndividualReq):
         """
         提交主方法
         """
-        match broker:
+        match req.broker:
             case Broker.JP:
                 from app.submit.jp_submit import JPSubmit
                 return JPSubmit(req).submit()
