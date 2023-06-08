@@ -7,23 +7,27 @@ from app.utils.const.const import Broker
 from app.utils.rsp import rsp_success
 
 
-class BYAudit(Audit):
+class JPAudit(Audit):
     def __init__(self, req: IndividualReq):
-        super().__init__(Broker.BY, req)
+        super().__init__(Broker.JP, req)
 
     def audit_flow(self):
         level1_rsp = self.level1_audit(self.task_id)
+        level2_rsp = self.level2_audit(self.task_id)
         get_audit_rsp = self.get_audit_result()
 
         audit_flow_rsp = {
             "level1_rsp": level1_rsp.get("data"),
-            "get_audit_rsp": get_audit_rsp.get("data")
+            "level2_rsp": level2_rsp.get("data"),
+            "get_audit_rsp": get_audit_rsp.get("data"),
+            "broker": self.broker.value
         }
         return rsp_success(audit_flow_rsp)
 
     def get_audit_result(self):
         get_audit_req = {
-            'task_id': self.task_id,
+            "task_id": self.task_id,
+            "broker": self.broker
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -35,12 +39,12 @@ class BYAudit(Audit):
         return get_audit_rsp.json()
 
     def get_task_id(self, uid):
-        return fake.random_int(1, 999999)
+        return fake.random_int(10000, 999999)
 
     def level1_audit(self, task_id):
         level1_req = {
-            'task_id': self.task_id,
-            'action': "Approve",
+            "task_id": self.task_id,
+            "action": "Approve",
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -52,19 +56,26 @@ class BYAudit(Audit):
         return level1_rsp.json()
 
     def level2_audit(self, task_id):
-        """
-        BY券商没有二级审核
-        """
-        pass
+        level2_req = {
+            "task_id": self.task_id,
+            "action": "Approve",
+        }
+
+        # 请求本地的mock接口，伪造返回成功
+        with current_app.test_request_context():
+            # 生成路由的 URL
+            url = url_for("apis.mock_rsp", req="level1_audit")
+            # 使用 requests 发送 POST 请求
+            level2_rsp = self.session.post(f"http://127.0.0.1:5000{url}", json=level2_req)
+        return level2_rsp.json()
 
     def ro_audit(self, task_id):
         """
-        BY券商没有RO审核
+        JP券商没有RO审核
         """
         pass
 
     def accelerate(self):
         """
-        BY券商无法加速自动审核
+        JP券商没有加速审核
         """
-        pass

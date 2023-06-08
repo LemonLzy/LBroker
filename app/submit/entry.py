@@ -27,3 +27,5 @@ class SubmitEntry:
             case Broker.CR:
                 from app.submit.cr_submit import CRSubmit
                 return CRSubmit(req).submit()
+            case _:
+                raise Exception("Broker not found.")
