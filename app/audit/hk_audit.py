@@ -7,18 +7,16 @@ from app.utils.const.const import Broker
 from app.utils.rsp import rsp_success
 
 
-class CRAudit(Audit):
+class HKAudit(Audit):
     def __init__(self, req: IndividualReq):
-        super().__init__(Broker.CR, req)
+        super().__init__(Broker.HK, req)
 
     def audit_flow(self):
-        level1_rsp = self.level1_audit(self.task_id)
         level2_rsp = self.level2_audit(self.task_id)
         account_rsp = self.accelerate()
         get_audit_rsp = self.get_audit_result()
 
         audit_flow_rsp = {
-            "level1_rsp": level1_rsp.get("data"),
             "level2_rsp": level2_rsp.get("data"),
             "account_rsp": account_rsp.get("data"),
             "get_audit_rsp": get_audit_rsp.get("data"),
@@ -44,18 +42,10 @@ class CRAudit(Audit):
         return fake.random_int(10000, 999999)
 
     def level1_audit(self, task_id):
-        level1_req = {
-            "task_id": self.task_id,
-            "action": "Approve",
-        }
-
-        # 请求本地的mock接口，伪造返回成功
-        with current_app.test_request_context():
-            # 生成路由的 URL
-            url = url_for("apis.mock_rsp", req="level1_audit")
-            # 使用 requests 发送 POST 请求
-            level1_rsp = self.session.post(f"http://127.0.0.1:5000{url}", json=level1_req)
-        return level1_rsp.json()
+        """
+        HK券商没有level1审核
+        """
+        pass
 
     def level2_audit(self, task_id):
         level2_req = {

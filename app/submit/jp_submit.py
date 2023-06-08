@@ -4,6 +4,7 @@ from app.fakes.fakes import fake
 from app.params.params import IndividualReq
 from app.submit.submit import BaseSubmit
 from app.utils.const.const import Broker
+from app.utils.rsp import rsp_success
 
 
 class JPSubmit(BaseSubmit):
@@ -116,7 +117,6 @@ class JPSubmit(BaseSubmit):
     def submit(self):
         basic_rsp = self.basic_info()
         address_rsp = self.address_info()
-        tax_rsp = self.tax_info()
         question_rsp = self.question_info()
         disclosure_rsp = self.disclosure_info()
         my_number_rsp = self.my_number_info()
@@ -125,11 +125,10 @@ class JPSubmit(BaseSubmit):
         submit_rsp = {
             "basic_rsp": basic_rsp.get("data"),
             "address_rsp": address_rsp.get("data"),
-            "tax_rsp": tax_rsp.get("data"),
             "question_rsp": question_rsp.get("data"),
             "disclosure_rsp": disclosure_rsp.get("data"),
             "my_number_rsp": my_number_rsp.get("data"),
             "cert_rsp": cert_rsp.get("data")
         }
 
-        return submit_rsp
+        return rsp_success(submit_rsp)

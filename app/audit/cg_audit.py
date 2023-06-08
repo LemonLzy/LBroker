@@ -4,6 +4,7 @@ from app.audit.audit import Audit
 from app.fakes.fakes import fake
 from app.params.params import IndividualReq
 from app.utils.const.const import Broker
+from app.utils.rsp import rsp_success
 
 
 class CGAudit(Audit):
@@ -20,7 +21,7 @@ class CGAudit(Audit):
             "level2_rsp": level2_rsp.get("data"),
             "get_audit_rsp": get_audit_rsp.get("data")
         }
-        return audit_flow_rsp
+        return rsp_success(audit_flow_rsp)
 
     def get_audit_result(self):
         get_audit_req = {
