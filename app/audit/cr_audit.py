@@ -6,19 +6,22 @@ from app.params.params import IndividualReq
 from app.utils.const.const import Broker
 
 
-class CGAudit(Audit):
+class CRAudit(Audit):
     def __init__(self, req: IndividualReq):
-        super().__init__(Broker.CG, req)
+        super().__init__(Broker.CR, req)
 
     def audit_flow(self):
         level1_rsp = self.level1_audit(self.task_id)
         level2_rsp = self.level2_audit(self.task_id)
+        account_rsp = self.accelerate()
         get_audit_rsp = self.get_audit_result()
 
         audit_flow_rsp = {
             "level1_rsp": level1_rsp.get("data"),
             "level2_rsp": level2_rsp.get("data"),
-            "get_audit_rsp": get_audit_rsp.get("data")
+            "account_rsp": account_rsp.get("data"),
+            "get_audit_rsp": get_audit_rsp.get("data"),
+            "broker": self.broker.value
         }
         return audit_flow_rsp
 
@@ -68,9 +71,15 @@ class CGAudit(Audit):
         return level2_rsp.json()
 
     def ro_audit(self, task_id):
-        ro_req = {
+        """
+        CR券商没有RO审核
+        """
+        pass
+
+    def accelerate(self):
+        accelerate_req = {
             "task_id": self.task_id,
-            "action": "Approve",
+            "action": "Accelerate",
         }
 
         # 请求本地的mock接口，伪造返回成功
@@ -78,11 +87,5 @@ class CGAudit(Audit):
             # 生成路由的 URL
             url = url_for("apis.mock_rsp", req="level1_audit")
             # 使用 requests 发送 POST 请求
-            ro_rsp = self.session.post(f"http://127.0.0.1:5000{url}", json=ro_req)
-        return ro_rsp.json()
-
-    def accelerate(self):
-        """
-        CG券商无法加速自动审核
-        """
-        pass
+            accelerate_rsp = self.session.post(f"http://127.0.0.1:5000{url}", json=accelerate_req)
+        return accelerate_rsp.json()
