@@ -1,4 +1,30 @@
 这是一个关于金融业务，构造数据的测试工具练手项目，for 为数不多的测开同学。
+### 启动
+后端：
+```shell
+$ pip install -r requirements.txt
+```
+
+```shell
+$ export FLASK_APP=main.py
+```
+
+```shell
+$ flask run
+```
+
+前端：
+```shell
+$ cd web
+```
+
+```shell
+$ npm install
+```
+
+```shell
+$ npm run dev
+```
 
 ### 项目结构
 整体结构：
