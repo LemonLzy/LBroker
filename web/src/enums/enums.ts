@@ -38,7 +38,13 @@ enum Ability {
     FUTURES = "期货",
     OPTION = "期权",
     FOREX = "外汇",
+    CRYPTO = "加密货币",
+}
+
+enum Kind {
+    individual = "个人",
+    institution = "机构",
 }
 
 
-export {Broker, Attribution, Ability};
+export {Broker, Attribution, Ability, Kind};

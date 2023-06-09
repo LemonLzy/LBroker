@@ -5,7 +5,9 @@ const formDate = (d: number) => {
 };
 
 function conversionTimestamp(timestamp: number) {
-  const date = new Date(timestamp * 1000);
+  const isMilliseconds = String(timestamp).length === 13; // 判断时间戳的长度是否为 13，以判断单位是秒还是毫秒
+
+  const date = new Date(timestamp * (isMilliseconds ? 1 : 1000)); // 根据单位判断是否需要乘以 1000
   const year = date.getFullYear();
   const month = ('0' + (date.getMonth() + 1)).slice(-2);
   const day = ('0' + date.getDate()).slice(-2);
