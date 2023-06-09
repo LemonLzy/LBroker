@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <el-tabs v-model="activeName" class="openTable">
-      <el-tab-pane label="个人开户" name="individual">
+      <el-tab-pane label="个人开户" name="individual_open">
         <Individual/>
+      </el-tab-pane>
+      <el-tab-pane label="账户查询" name="search">
+        <Search/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -10,9 +13,10 @@
 
 <script lang="ts" setup>
 import Individual from '@/components/Individual.vue';
+import Search from '@/components/Search.vue';
 import {ref} from 'vue'
 
-const activeName = ref('individual')
+const activeName = ref('individual_open')
 </script>
 
 <style scoped>
@@ -22,8 +26,8 @@ const activeName = ref('individual')
   background-clip: border-box;
   border: 1px solid rgba(134, 140, 151, 0.24);
   border-radius: 3px;
-  max-width: 800px;
-  max-height: 60vh;
+  max-width: 900px;
+  max-height: 70vh;
   box-shadow: rgb(53 64 82 / 4%) 0 2px 4px 0;
   position: absolute;
   top: 0;

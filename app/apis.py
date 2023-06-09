@@ -1,6 +1,5 @@
 from flask_cors import CORS
 
-from app.fakes.fakes import fake
 from app.params.params import BaseRsp
 from app.transport.transport import Trans
 from flask import Blueprint, jsonify, Response, request

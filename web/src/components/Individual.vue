@@ -100,7 +100,6 @@ const submit = async () => {
     lastName: 'Flintstone'
   })
   console.log(res)
-  msg = res.msg
 }
 </script>
 
