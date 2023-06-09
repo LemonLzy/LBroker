@@ -38,8 +38,38 @@ class SignInRsp:
         return f"sig: {self.sig}"
 
 
+@dataclass
+class SearchRsp:
+    """
+    搜索功能的返回参数
+    """
+    broker: Broker = None
+    account_id: int = None
+    market_id: int = None
+    enable_market: list = None
+    model: str = None
+    kind: str = None
+    opened_time: str = None
+    closed_time: str = None
+
+    def __post_init__(self):
+        self.broker = fake.random_element(Broker)
+        self.account_id = fake.random_int(100000000, 999999999)
+        self.market_id = fake.random_int(1, 9)
+        self.enable_market = fake.random_elements(elements=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), length=self.market_id)
+        self.model = fake.random_element(("fund_acc", "single_acc", "uni_acc"))
+        self.kind = fake.random_element(("individual", "company"))
+        self.opened_time = fake.unix_time()
+        self.closed_time = fake.unix_time()
+
+    def __repr__(self):
+        return f"broker: {self.broker}, account_id: {self.account_id}, market_id: {self.market_id}, " \
+               f"enable_market: {self.enable_market}, model: {self.model}, kind: {self.kind}, " \
+               f"opened_time: {self.opened_time}, closed_time: {self.closed_time}"
+
+
 if __name__ == '__main__':
     s = SignUpRsp()
     print(s)
-    s1 = SignInRsp()
+    s1 = SearchRsp()
     print(s1)

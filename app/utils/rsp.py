@@ -1,7 +1,9 @@
+from typing import Any
+
 from app.params.params import BaseRsp
 
 
-def rsp_success(data: dict):
+def rsp_success(data: Any):
     return BaseRsp(code=0, msg="Success", data=data)
 
 
