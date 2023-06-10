@@ -61,3 +61,4 @@ $ npm run dev
 - [x] 提交开户申请
 - [x] 审批开户申请
 - [x] 开户信息查询
+  - ![开户信息查询](.github/search.gif)

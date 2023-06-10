@@ -33,7 +33,7 @@
           v-loading="loadingShow"
       >
         <el-table-column type="expand">
-          <template v-slot="props">
+          <template #default="props">
             <el-form label-position="left" inline class='expand'>
               <el-form-item label="状态">
                 <span>{{ props.row.status }}</span>
@@ -47,12 +47,12 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column prop="broker" label="券商" align="center" :resizable="false"></el-table-column>
-        <el-table-column prop="kind" label="kind" align="center" :resizable="false"></el-table-column>
-        <el-table-column prop="model" label="model" align="center" :resizable="false"></el-table-column>
-        <el-table-column prop="accountCategory" label="类型" align="center" :resizable="false"></el-table-column>
-        <el-table-column prop="enable_market" label="交易能力" align="center"></el-table-column>
-        <el-table-column prop="account_id" label="account_id" align="center"></el-table-column>
+        <el-table-column prop="broker" label="券商" align="center" width="70" :resizable="false"></el-table-column>
+        <el-table-column prop="kind" label="kind" align="center" width="70" :resizable="false"></el-table-column>
+        <el-table-column prop="model" label="model" align="center" width="90" :resizable="false"></el-table-column>
+        <el-table-column prop="type" label="类型" align="center" width="70" :resizable="false"></el-table-column>
+        <el-table-column prop="ability" label="交易能力" align="center"></el-table-column>
+        <el-table-column prop="account_id" label="账户id" width="150" align="center"></el-table-column>
         <template v-slot:empty>
           <el-empty image-size:30 description="未查询到账户信息"></el-empty>
         </template>
@@ -62,9 +62,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Ability, Broker, Kind } from "@/enums/enums.ts";
+import {Ability, Broker, Kind, Model, Status, Type} from "@/enums/enums.ts";
 import { conversionTimestamp } from "@/app/utils.ts";
-import { reqSearch } from "@/api/brokerApi.js";
+import {reqSearch, SearchRsp} from "@/api/brokerApi.js";
 import type { FormInstance, FormRules } from 'element-plus';
 import {computed, reactive, ref} from "vue";
 
@@ -81,28 +81,22 @@ const searchForm = reactive({
   uid: '',
 });
 
-const tableData = reactive([]); // 定义 tableData 数组
+const tableData = reactive<SearchRsp[]>([]);
 
 const formattedTableData = computed(() => {
   return tableData.map((item) => {
-    const formattedItem = { ...item };
-
-    // 处理 enable_market 字段
-    formattedItem.enable_market = formattedItem.enable_market
-        .map((ability) => Ability[ability])
-        .join(" | ");
-
-    // 处理 broker 字段
-    formattedItem.broker = Broker[formattedItem.broker];
-
-    // 处理 kind 字段
-    formattedItem.kind = Kind[formattedItem.kind];
-
-    // 处理时间字段
-    formattedItem.opened_time = conversionTimestamp(formattedItem.opened_time);
-    formattedItem.closed_time = conversionTimestamp(formattedItem.closed_time);
-
-    return formattedItem;
+    return {
+      broker: Broker[item.broker],
+      kind: Kind[item.kind],
+      model: Model[item.model],
+      type: Type[item.type],
+      ability: item.enable_market.map((ability) => Ability[ability]).join(' | '),
+      account_id: item.account_id,
+      status: Status[item.status],
+      opened_time: conversionTimestamp(item.opened_time),
+      // 当closed_time为""时，显示为'-'，否则显示时间
+      closed_time: item.closed_time ? conversionTimestamp(item.closed_time) : '-',
+    };
   });
 });
 
@@ -150,36 +144,20 @@ const submit = () => {
   border-color: #195398;
 }
 
-:deep .expand {
-  font-size: 0;
-}
-
-:deep .expand label {
+.expand label {
   width: 100px;
   color: #99a9bf;
 }
 
-:deep .expand .el-form-item {
+:deep(.expand .el-form-item) {
   margin-right: 0;
   margin-bottom: 0;
   margin-left: 10px;
   width: 50%;
+  font-size: 8px;
 }
 
-:deep .el-table__expand-icon {
-  --webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-:deep .el-table__expand-icon .el-icon-arrow-right:before {
-  content: "\e791";
-  color: #519dfa;
-  font-weight: 1000;
-}
-
-:deep .el-table__expand-icon--expanded .el-icon-arrow-right:before {
-  content: "\e790";
-  vertical-align: center;
-  font-weight: 1000;
+:deep(.expand .el-form-item__label) {
+  font-size: 8px;
 }
 </style>

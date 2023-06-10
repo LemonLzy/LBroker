@@ -48,8 +48,10 @@ class SearchRsp:
     account_id: int = None
     market_id: int = None
     enable_market: list = None
+    type: str = None
     model: str = None
     kind: str = None
+    status: int = None
     opened_time: float = None
     closed_time: float = None
 
@@ -61,10 +63,12 @@ class SearchRsp:
             elements=("US_STOCK", "HK_STOCK", "A_STOCK", "JP_STOCK", "SG_STOCK", "UK_STOCK", "DE_STOCK",
                       "FUND", "BOND", "FUTURES", "OPTION", "FOREX", "CRYPTO",),
             length=self.market_id, unique=True)
+        self.type = fake.random_element(("margin", "cash"))
         self.model = fake.random_element(("fund_acc", "single_acc", "uni_acc"))
         self.kind = fake.random_element(("individual", "institution"))
+        self.status = fake.random_element(("closed", "opened"))
         self.opened_time = time.mktime(fake.date_time_this_year().timetuple())
-        self.closed_time = time.mktime(fake.date_time_this_year().timetuple())
+        self.closed_time = time.mktime(fake.date_time_this_year().timetuple()) if self.status == "closed" else ""
 
     def __repr__(self):
         return f"broker: {self.broker}, account_id: {self.account_id}, market_id: {self.market_id}, " \
