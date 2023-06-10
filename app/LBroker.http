@@ -1,0 +1,21 @@
+### Request Search Interface
+POST http://localhost:5000/individual
+Content-Type: application/json
+
+{
+    "method": "Search",
+    "uid": 123123123
+}
+
+### Request Individual Submit Interface
+POST http://localhost:5000/individual
+Content-Type: application/json
+
+{
+    "method": "Individual",
+    "attribution": "BY",
+    "account_status": 1,
+    "broker": "JP",
+    "open_account": [1, 2 ,3 ,4 ,5],
+    "activate_account": [1, 2 ,3 ,4 ,5]
+}
