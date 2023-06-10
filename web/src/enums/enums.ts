@@ -46,5 +46,21 @@ enum Kind {
     institution = "机构",
 }
 
+enum Type {
+    margin = "融资",
+    cash = "现金",
+}
 
-export {Broker, Attribution, Ability, Kind};
+enum Model {
+    fund_acc = "基金账户",
+    single_acc = "单一账户",
+    uni_acc = "统一账户",
+}
+
+enum Status {
+    closed = "已关闭",
+    opened = "已开通",
+}
+
+
+export {Broker, Attribution, Ability, Kind, Type, Model, Status};
