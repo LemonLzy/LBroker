@@ -1,31 +1,31 @@
 /**
  * @description: 开户券商
  */
-enum Broker {
-    BY = "BY",
-    CG = "CG",
-    CR = "CR",
-    US = "US",
-    JP = "JP",
-    HK = "HK",
+const enum Broker {
+    BY = "BY券商",
+    CG = "CG券商",
+    CR = "CR券商",
+    US = "US券商",
+    JP = "JP券商",
+    HK = "HK券商",
 }
 
 /**
  * @description: 归属地
  */
-enum Attribution {
-    BY = "BY",
-    CG = "CG",
-    CR = "CR",
-    US = "US",
-    JP = "JP",
-    HK = "HK",
+const enum Attribution {
+    BY = "BY券商",
+    CG = "CG券商",
+    CR = "CR券商",
+    US = "US券商",
+    JP = "JP券商",
+    HK = "HK券商",
 }
 
 /**
  * @description: 交易能力
  */
-enum Ability {
+const enum Ability {
     US_STOCK = "美股",
     HK_STOCK = "港股",
     A_STOCK = "A股",
@@ -41,26 +41,34 @@ enum Ability {
     CRYPTO = "加密货币",
 }
 
-enum Kind {
+const enum BrokerOpenAbility {
+    // HK = [Ability.HK_STOCK, Ability.A_STOCK],
+}
+
+const enum BrokerActivateAbility {
+
+}
+
+const enum Kind {
     individual = "个人",
     institution = "机构",
 }
 
-enum Type {
+const enum Type {
     margin = "融资",
     cash = "现金",
 }
 
-enum Model {
+const enum Model {
     fund_acc = "基金账户",
     single_acc = "单一账户",
     uni_acc = "统一账户",
 }
 
-enum Status {
+const enum Status {
     closed = "已关闭",
     opened = "已开通",
 }
 
 
-export {Broker, Attribution, Ability, Kind, Type, Model, Status};
+export {Broker, Attribution, Ability, Kind, Type, Model, Status, BrokerOpenAbility, BrokerActivateAbility};

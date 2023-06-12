@@ -7,9 +7,13 @@
       </el-select>
     </el-form-item>
     <el-form-item label="账号归属地">
-      <el-select v-model="form.attr" placeholder="please select your zone">
-        <el-option label="BR" value="shanghai"/>
-        <el-option label="JP" value="beijing"/>
+      <el-select v-model="attr" placeholder="please select your zone">
+        <el-option
+            v-for="(value, key) in Broker"
+            :key="key"
+            :label="value"
+            :value="key"
+        />
       </el-select>
     </el-form-item>
     <el-form-item label="账号状态">
@@ -22,9 +26,13 @@
       <el-switch v-model="form.delivery"/>
     </el-form-item>
     <el-form-item label="开户券商">
-      <el-select v-model="form.broker" placeholder="please select your zone">
-        <el-option label="BR" value="shanghai"/>
-        <el-option label="US" value="beijing"/>
+      <el-select v-model="open" placeholder="please select your zone">
+        <el-option
+            v-for="(value, key) in Broker"
+            :key="key"
+            :label="value"
+            :value="key"
+        />
       </el-select>
     </el-form-item>
     <el-form-item label="国籍">
@@ -72,10 +80,13 @@
   </el-dialog>
 </template>
 
-
 <script lang="ts" setup>
 import {reactive, ref} from 'vue'
 import axios from "axios";
+import {Attribution, Broker} from "@/enums/enums.ts";
+
+const attr = ref<Attribution>()
+const open = ref<Broker>()
 
 const form = reactive({
   kind: '',
