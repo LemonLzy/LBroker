@@ -41,34 +41,61 @@ const enum Ability {
     CRYPTO = "加密货币",
 }
 
-const enum BrokerOpenAbility {
-    // HK = [Ability.HK_STOCK, Ability.A_STOCK],
+/**
+ * @description: 开户选择的交易能力
+ */
+const BrokerOpenAbility = {
+    BY: [Ability.US_STOCK, Ability.JP_STOCK, Ability.FUTURES, Ability.CRYPTO],
+    CG: [Ability.SG_STOCK, Ability.UK_STOCK, Ability.FOREX],
+    CR: [Ability.HK_STOCK, Ability.A_STOCK, Ability.FUND, Ability.BOND],
+    US: [Ability.US_STOCK, Ability.OPTION, Ability.FOREX, Ability.CRYPTO, Ability.DE_STOCK],
+    JP: [Ability.JP_STOCK, Ability.US_STOCK],
+    HK: [Ability.HK_STOCK, Ability.A_STOCK, Ability.FUND, Ability.FUTURES],
+};
+
+/**
+ * @description: 激活选择的交易能力
+ */
+const BrokerActivateAbility = {
+    BY: [Ability.UK_STOCK, Ability.A_STOCK, Ability.FUND, Ability.DE_STOCK],
+    CG: [Ability.US_STOCK, Ability.FOREX, Ability.CRYPTO, Ability.FUND],
+    CR: [Ability.JP_STOCK, Ability.US_STOCK],
+    US: [Ability.SG_STOCK, Ability.A_STOCK, Ability.CRYPTO],
+    JP: [Ability.A_STOCK, Ability.FUND, Ability.BOND, Ability.OPTION],
+    HK: [Ability.US_STOCK, Ability.JP_STOCK, Ability.UK_STOCK, Ability.SG_STOCK],
 }
 
-const enum BrokerActivateAbility {
-
-}
-
+/**
+ * @description: 个人户/机构户
+ */
 const enum Kind {
     individual = "个人",
     institution = "机构",
 }
 
+/**
+ * @description: 账户融资类型
+ */
 const enum Type {
     margin = "融资",
     cash = "现金",
 }
 
+/**
+ * @description: 账户种类枚举
+ */
 const enum Model {
     fund_acc = "基金账户",
     single_acc = "单一账户",
     uni_acc = "统一账户",
 }
 
+/**
+ * @description: 账户开通状态
+ */
 const enum Status {
     closed = "已关闭",
     opened = "已开通",
 }
-
 
 export {Broker, Attribution, Ability, Kind, Type, Model, Status, BrokerOpenAbility, BrokerActivateAbility};

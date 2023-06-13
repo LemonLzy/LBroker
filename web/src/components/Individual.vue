@@ -7,9 +7,9 @@
       </el-select>
     </el-form-item>
     <el-form-item label="账号归属地">
-      <el-select v-model="attr" placeholder="please select your zone">
+      <el-select v-model="form.attr" placeholder="please select your zone">
         <el-option
-            v-for="(value, key) in Broker"
+            v-for="(value, key) in Attribution"
             :key="key"
             :label="value"
             :value="key"
@@ -23,10 +23,10 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="综合账户">
-      <el-switch v-model="form.delivery"/>
+      <el-switch v-model="form.is_uni"/>
     </el-form-item>
     <el-form-item label="开户券商">
-      <el-select v-model="open" placeholder="please select your zone">
+      <el-select v-model="form.broker" placeholder="please select your zone">
         <el-option
             v-for="(value, key) in Broker"
             :key="key"
@@ -41,20 +41,26 @@
         <el-option label="HK" value="beijing"/>
       </el-select>
     </el-form-item>
+    <!-- 交易能力 -->
     <el-form-item label="交易能力">
       <el-checkbox-group v-model="form.openStock">
-        <el-checkbox label="美股" name="type"/>
-        <el-checkbox label="港股" name="type"/>
-        <el-checkbox label="A股" name="type"/>
-        <el-checkbox label="日股" name="type"/>
+        <el-checkbox
+            v-for="ability in openAbilities"
+            :label="ability"
+            :key="ability"
+            name="type"
+        >{{ ability }}</el-checkbox>
       </el-checkbox-group>
     </el-form-item>
+    <!-- 激活能力 -->
     <el-form-item label="激活能力">
       <el-checkbox-group v-model="form.activate">
-        <el-checkbox label="基金" name="type"/>
-        <el-checkbox label="期货" name="type"/>
-        <el-checkbox label="外汇" name="type"/>
-        <el-checkbox label="债券" name="type"/>
+        <el-checkbox
+            v-for="ability in activateAbilities"
+            :label="ability"
+            :key="ability"
+            name="type"
+        >{{ ability }}</el-checkbox>
       </el-checkbox-group>
     </el-form-item>
     <el-form-item>
@@ -81,26 +87,45 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref} from 'vue'
+import {computed, onMounted, ref, watch} from 'vue'
 import axios from "axios";
-import {Attribution, Broker} from "@/enums/enums.ts";
+import {Attribution, Broker, BrokerActivateAbility, BrokerOpenAbility} from "@/enums/enums.ts";
 
-const attr = ref<Attribution>()
-const open = ref<Broker>()
+// data定义
+const brokerOptions = Object.keys(Broker).map((key) => ({
+  label: Broker[key],
+  value: key,
+}))
 
-const form = reactive({
+const form = ref({
   kind: '',
   status: '',
-  attr: '',
-  broker: '',
-  nation: '',
-  delivery: false,
+  attr: Broker.BY,
+  broker: Broker.BY,
+  nation: 'CN',
+  is_uni: false,
   openStock: [],
   activate: [],
 })
+
+const openAbilities = ref<string[]>([]);
+const activateAbilities = ref<string[]>([]);
+
+onMounted(() => {
+  const keyByValue = getKeyByValue(Broker, form.value.broker);
+  console.log("onMouted", keyByValue)
+  openAbilities.value = BrokerOpenAbility[keyByValue] || [];
+  activateAbilities.value = BrokerActivateAbility[keyByValue] || [];
+});
+
+watch(() => form.value.broker, (newBroker) => {
+  console.log("watch", newBroker)
+  openAbilities.value = BrokerOpenAbility[newBroker] || [];
+  activateAbilities.value = BrokerActivateAbility[newBroker] || [];
+});
+
 const centerDialogVisible = ref(false)
 let msg = ref('')
-
 
 const submit = async () => {
   centerDialogVisible.value = true
@@ -111,6 +136,10 @@ const submit = async () => {
     lastName: 'Flintstone'
   })
   console.log(res)
+}
+
+function getKeyByValue(obj: Record<string, string>, value: string): string | undefined {
+  return Object.keys(obj).find((key) => obj[key] === value);
 }
 </script>
 
