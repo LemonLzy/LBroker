@@ -98,4 +98,13 @@ const enum Status {
     opened = "已开通",
 }
 
-export {Broker, Attribution, Ability, Kind, Type, Model, Status, BrokerOpenAbility, BrokerActivateAbility};
+const enum Nation {
+    CN = "中国大陆",
+    HK = "中国香港",
+    TW = "中国台湾",
+    US = "美国",
+    JP = "日本",
+    SG = "新加坡",
+}
+
+export {Broker, Attribution, Ability, Kind, Type, Model, Status, Nation, BrokerOpenAbility, BrokerActivateAbility};

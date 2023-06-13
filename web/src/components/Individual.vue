@@ -37,15 +37,19 @@
     </el-form-item>
     <el-form-item label="国籍">
       <el-select v-model="form.nation" placeholder="please select your zone">
-        <el-option label="CN" value="shanghai"/>
-        <el-option label="HK" value="beijing"/>
+        <el-option
+            v-for="(value, key) in Nation"
+            :key="key"
+            :label="value"
+            :value="key"
+        />
       </el-select>
     </el-form-item>
     <!-- 交易能力 -->
     <el-form-item label="交易能力">
-      <el-checkbox-group v-model="form.openStock">
+      <el-checkbox-group v-model="form.open">
         <el-checkbox
-            v-for="ability in openAbilities"
+            v-for="ability in openRef"
             :label="ability"
             :key="ability"
             name="type"
@@ -56,7 +60,7 @@
     <el-form-item label="激活能力">
       <el-checkbox-group v-model="form.activate">
         <el-checkbox
-            v-for="ability in activateAbilities"
+            v-for="ability in activateRef"
             :label="ability"
             :key="ability"
             name="type"
@@ -87,41 +91,33 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, ref, watch} from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import axios from "axios";
-import {Attribution, Broker, BrokerActivateAbility, BrokerOpenAbility} from "@/enums/enums.ts";
-
-// data定义
-const brokerOptions = Object.keys(Broker).map((key) => ({
-  label: Broker[key],
-  value: key,
-}))
+import {Attribution, Broker, BrokerActivateAbility, BrokerOpenAbility, Nation} from "@/enums/enums.ts";
 
 const form = ref({
   kind: '',
   status: '',
   attr: Broker.BY,
   broker: Broker.BY,
-  nation: 'CN',
+  nation: Nation.CN,
   is_uni: false,
-  openStock: [],
+  open: [],
   activate: [],
 })
 
-const openAbilities = ref<string[]>([]);
-const activateAbilities = ref<string[]>([]);
+const openRef = ref<string[]>([]);
+const activateRef = ref<string[]>([]);
 
 onMounted(() => {
   const keyByValue = getKeyByValue(Broker, form.value.broker);
-  console.log("onMouted", keyByValue)
-  openAbilities.value = BrokerOpenAbility[keyByValue] || [];
-  activateAbilities.value = BrokerActivateAbility[keyByValue] || [];
+  openRef.value = BrokerOpenAbility[keyByValue] || [];
+  activateRef.value = BrokerActivateAbility[keyByValue] || [];
 });
 
 watch(() => form.value.broker, (newBroker) => {
-  console.log("watch", newBroker)
-  openAbilities.value = BrokerOpenAbility[newBroker] || [];
-  activateAbilities.value = BrokerActivateAbility[newBroker] || [];
+  openRef.value = BrokerOpenAbility[newBroker] || [];
+  activateRef.value = BrokerActivateAbility[newBroker] || [];
 });
 
 const centerDialogVisible = ref(false)
@@ -130,10 +126,11 @@ let msg = ref('')
 const submit = async () => {
   centerDialogVisible.value = true
 
+  console.log(form)
   // 异步请求接口，并等待异步请求的返回值
   const {data: res} = await axios.post('http://127.0.0.1:5000/individual', {
     firstName: 'Fred',
-    lastName: 'Flintstone'
+    lastName: 'test'
   })
   console.log(res)
 }
